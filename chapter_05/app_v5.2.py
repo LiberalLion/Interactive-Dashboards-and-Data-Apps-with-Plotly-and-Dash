@@ -149,14 +149,15 @@ def plot_gini_year_barchart(year):
         raise PreventUpdate
     df = poverty[poverty['year'].eq(year)].sort_values(gini).dropna(subset=[gini])
     n_countries = len(df['Country Name'])
-    fig = px.bar(df,
-                 x=gini,
-                 y='Country Name', 
-                 orientation='h',
-                 height=200 + (n_countries*20), 
-                 width=650,
-                 title=gini + ' ' + str(year))
-    return fig
+    return px.bar(
+        df,
+        x=gini,
+        y='Country Name',
+        orientation='h',
+        height=200 + (n_countries * 20),
+        width=650,
+        title=gini + ' ' + str(year),
+    )
 
 
 @app.callback(Output('gini_country_barchart', 'figure'), Input('gini_country_dropdown', 'value'))
@@ -164,11 +165,7 @@ def plot_gini_country_barchart(country):
     if not country:
         raise PreventUpdate
     df = poverty[poverty['Country Name']==country].dropna(subset=[gini])
-    fig = px.bar(df,
-                 x='year',
-                 y=gini, 
-                 title=' - '.join([gini, country]))
-    return fig
+    return px.bar(df, x='year', y=gini, title=' - '.join([gini, country]))
 
 
 @app.callback(Output('income_share_country_barchart', 'figure'), Input('income_share_country_dropdown', 'value'))

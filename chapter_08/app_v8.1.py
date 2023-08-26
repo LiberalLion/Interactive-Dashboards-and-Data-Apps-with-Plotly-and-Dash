@@ -62,10 +62,8 @@ def make_empty_fig():
 
 
 def multiline_indicator(indicator):
-    final = []
     split = indicator.split()
-    for i in range(0, len(split), 3):
-        final.append(' '.join(split[i:i+3]))
+    final = [' '.join(split[i:i+3]) for i in range(0, len(split), 3)]
     return '<br>'.join(final)
 
 
